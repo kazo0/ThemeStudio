@@ -1,0 +1,135 @@
+<UserControl x:Class="ThemeStudio.Views.ProjectsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Spacing="{ThemeResource Space600}">
+        <StackPanel Spacing="{ThemeResource Space200}">
+            <TextBlock Text="WORKSPACE / PROJECTS"
+                       Style="{StaticResource LabelSmall}"
+                       Foreground="{ThemeResource PrimaryBrush}" />
+            <TextBlock Text="Good work starts here."
+                       Style="{StaticResource DisplaySmall}"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="A little structure. A lot of possibility."
+                       Style="{StaticResource BodyLarge}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+        <Grid ColumnDefinitions="*,Auto"
+              ColumnSpacing="{ThemeResource Space300}">
+            <TextBox x:Name="SearchInput"
+                     Text="{Binding ProjectQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     PlaceholderText="Find a project…"
+                     Style="{StaticResource OutlinedTextBoxStyle}"
+                     TextChanged="OnSearchChanged"
+                     AutomationProperties.Name="Find a project" />
+            <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                    Grid.Column="1"
+                    Content="+ New project"
+                    Style="{StaticResource FilledButtonStyle}"
+                    Click="OnNewProject" />
+        </Grid>
+        <Border x:Name="NewProjectForm"
+                Visibility="Collapsed"
+                Background="{ThemeResource SurfaceBrush}"
+                BorderBrush="{ThemeResource OutlineVariantBrush}"
+                BorderThickness="1"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <StackPanel Spacing="{ThemeResource Space300}">
+                <TextBlock Text="Give your next idea a home"
+                           Style="{StaticResource TitleLarge}"
+                           TextWrapping="Wrap" />
+                <TextBox x:Name="ProjectNameInput"
+                         Text="{Binding ProjectDraft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Header="Project name"
+                         PlaceholderText="Something worth making"
+                         Style="{StaticResource OutlinedTextBoxStyle}"
+                         MaxLength="80" />
+                <TextBlock x:Name="NameError"
+                           Text="Add a name for your project."
+                           Style="{StaticResource BodySmall}"
+                           Foreground="{ThemeResource ErrorBrush}"
+                           Visibility="Collapsed" />
+                <StackPanel Orientation="Horizontal"
+                            Spacing="{ThemeResource Space200}">
+                    <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                            Content="Create project"
+                            Style="{StaticResource FilledButtonStyle}"
+                            Click="OnCreateProject" />
+                    <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                            Content="Cancel"
+                            Style="{StaticResource TextButtonStyle}"
+                            Click="OnCancelProject" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Text="Your projects"
+                       Style="{StaticResource TitleLarge}" />
+            <TextBlock x:Name="ProjectCount"
+                       Grid.Column="1"
+                       Style="{StaticResource BodySmall}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                       VerticalAlignment="Center" />
+        </Grid>
+        <ItemsControl x:Name="ProjectList"
+                      HorizontalAlignment="Stretch">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="{ThemeResource SurfaceBrush}"
+                            BorderBrush="{ThemeResource OutlineVariantBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource Radius300CornerRadius}"
+                            Padding="{ThemeResource Space600Thickness}"
+                            Margin="0,0,0,12">
+                        <StackPanel Spacing="{ThemeResource Space400}">
+                            <Grid ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="{ThemeResource Space300}">
+                                <StackPanel Spacing="{ThemeResource Space100}">
+                                    <TextBlock Text="{Binding Category}"
+                                               Style="{StaticResource LabelSmall}"
+                                               Foreground="{ThemeResource PrimaryBrush}" />
+                                    <TextBlock Text="{Binding Name}"
+                                               Style="{StaticResource TitleLarge}"
+                                               TextWrapping="Wrap" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1"
+                                          IsChecked="{Binding Completed, Mode=TwoWay}"
+                                          Style="{StaticResource CheckBoxStyle}"
+                                          AutomationProperties.Name="Mark project complete" />
+                            </Grid>
+                            <ProgressBar Value="{Binding Progress}"
+                                         Maximum="100"
+                                         Style="{StaticResource ProgressBarStyle}"
+                                         AutomationProperties.Name="Project progress" />
+                            <Grid ColumnDefinitions="Auto,*,Auto"
+                                  ColumnSpacing="{ThemeResource Space200}">
+                                <Border Background="{ThemeResource SecondaryContainerBrush}"
+                                        CornerRadius="{ThemeResource RadiusFullCornerRadius}"
+                                        Padding="{ThemeResource Space200Thickness}">
+                                    <TextBlock Text="{Binding Initials}"
+                                               Style="{StaticResource LabelSmall}"
+                                               Foreground="{ThemeResource OnSecondaryContainerBrush}" />
+                                </Border>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Owner}"
+                                           Style="{StaticResource BodySmall}"
+                                           VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding Status}"
+                                           Style="{StaticResource LabelSmall}"
+                                           Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <TextBlock x:Name="EmptyState"
+                   Text="No projects match. Try another name or create something new."
+                   Visibility="Collapsed"
+                   Style="{StaticResource BodyLarge}"
+                   TextWrapping="Wrap" />
+    </StackPanel>
+</UserControl>

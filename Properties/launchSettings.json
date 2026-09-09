@@ -1,0 +1,17 @@
+{
+	"profiles": {
+		"Theme Studio (Desktop)": {
+			"commandName": "Project",
+			"compatibleTargetFramework": "desktop"
+		},
+		"Theme Studio (WebAssembly)": {
+			"commandName": "Project",
+			"compatibleTargetFramework": "browserwasm",
+			"launchBrowser": true,
+			"applicationUrl": "http://localhost:5127",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
+		}
+	}
+}

@@ -1,0 +1,186 @@
+<UserControl x:Class="ThemeStudio.DesignPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Padding="22,26"
+                Spacing="20">
+        <StackPanel Spacing="4">
+            <TextBlock Text="Make it yours"
+                       Style="{StaticResource TitleLarge}" />
+            <TextBlock Text="A living design system. Try a change."
+                       Style="{StaticResource BodySmall}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+        <StackPanel Spacing="8">
+            <TextBlock Text="DESIGN SYSTEM"
+                       Style="{StaticResource LabelSmall}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="8">
+                <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                        x:Name="SimpleButton"
+                        Content="Simple"
+                        HorizontalAlignment="Stretch"
+                        Style="{StaticResource FilledButtonStyle}"
+                        Click="OnSimpleClick" />
+                <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                        x:Name="MaterialButton"
+                        Grid.Column="1"
+                        Content="Material"
+                        HorizontalAlignment="Stretch"
+                        Style="{StaticResource FilledTonalButtonStyle}"
+                        Click="OnMaterialClick" />
+            </Grid>
+            <TextBlock Text="Shared keys. Different character."
+                       Style="{StaticResource BodySmall}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+        </StackPanel>
+        <StackPanel Spacing="8">
+            <TextBlock Text="Start with a mood"
+                       Style="{StaticResource LabelMedium}" />
+            <ComboBox x:Name="PresetPicker"
+                      AutomationProperties.Name="Start with a mood"
+                      HorizontalAlignment="Stretch"
+                      SelectionChanged="OnPresetChanged">
+                <x:String>Custom / current</x:String>
+                <x:String>Studio violet</x:String>
+                <x:String>Botanical</x:String>
+                <x:String>Terracotta</x:String>
+                <x:String>Ocean at night</x:String>
+            </ComboBox>
+        </StackPanel>
+        <Border Height="1"
+                Background="{ThemeResource OutlineVariantBrush}" />
+        <StackPanel Spacing="10">
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Text="Seed colors"
+                           Style="{StaticResource LabelMedium}"
+                           VerticalAlignment="Center" />
+                <ToggleSwitch x:Name="SeedToggle"
+                              Grid.Column="1"
+                              AutomationProperties.Name="Generate palette from seed colors"
+                              Style="{StaticResource ToggleSwitchStyle}"
+                              Toggled="OnSeedToggle" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto"
+                  ColumnSpacing="8">
+                <TextBox x:Name="PrimaryInput"
+                         Header="Primary"
+                         MaxLength="7"
+                         Style="{StaticResource OutlinedTextBoxStyle}"
+                         TextChanged="OnSeedTextChanged" />
+                <Button Grid.Column="1"
+                        VerticalAlignment="Bottom"
+                        Style="{StaticResource IconButtonStyle}"
+                        Click="OnColorPickerClick"
+                        AutomationProperties.Name="Choose primary seed color">
+                    <Border x:Name="SeedSwatch"
+                            Width="22"
+                            Height="22"
+                            CornerRadius="11" />
+                    <Button.Flyout>
+                        <Flyout>
+                            <ColorPicker x:Name="SeedPicker"
+                                         IsAlphaEnabled="False"
+                                         IsMoreButtonVisible="False"
+                                         ColorChanged="OnPickerColorChanged" />
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </Grid>
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="10">
+                <TextBox x:Name="SecondaryInput"
+                         Header="Secondary"
+                         MaxLength="7"
+                         Style="{StaticResource OutlinedTextBoxStyle}"
+                         TextChanged="OnSeedTextChanged" />
+                <TextBox x:Name="TertiaryInput"
+                         Grid.Column="1"
+                         Header="Tertiary"
+                         MaxLength="7"
+                         Style="{StaticResource OutlinedTextBoxStyle}"
+                         TextChanged="OnSeedTextChanged" />
+            </Grid>
+            <TextBlock x:Name="SeedError"
+                       Text="Use six hex digits, e.g. #6956D8."
+                       Foreground="{ThemeResource ErrorBrush}"
+                       Style="{StaticResource BodySmall}"
+                       Visibility="Collapsed"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+        <Border Height="1"
+                Background="{ThemeResource OutlineVariantBrush}" />
+        <StackPanel Spacing="12">
+            <TextBlock Text="SHAPE &amp; SPACE"
+                       Style="{StaticResource LabelSmall}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+            <TextBlock x:Name="CornerLabel"
+                       Style="{StaticResource BodySmall}" />
+            <Slider x:Name="CornerSlider"
+                    AutomationProperties.Name="Corner radius base"
+                    Minimum="0"
+                    Maximum="8"
+                    StepFrequency="1"
+                    Style="{StaticResource SliderStyle}"
+                    ValueChanged="OnTokenChanged" />
+            <TextBlock x:Name="SpacingLabel"
+                       Style="{StaticResource BodySmall}" />
+            <Slider x:Name="SpacingSlider"
+                    AutomationProperties.Name="Spacing base"
+                    Minimum="2"
+                    Maximum="6"
+                    StepFrequency="0.5"
+                    Style="{StaticResource SliderStyle}"
+                    ValueChanged="OnTokenChanged" />
+            <TextBlock Text="Density"
+                       Style="{StaticResource LabelMedium}" />
+            <ComboBox x:Name="DensityPicker"
+                      AutomationProperties.Name="Density"
+                      HorizontalAlignment="Stretch"
+                      SelectionChanged="OnTokenSelectionChanged">
+                <x:String>Compact · 0.75×</x:String>
+                <x:String>Regular · 1×</x:String>
+                <x:String>Comfy · 1.25×</x:String>
+            </ComboBox>
+        </StackPanel>
+        <Border Height="1"
+                Background="{ThemeResource OutlineVariantBrush}" />
+        <StackPanel Spacing="12">
+            <TextBlock Text="TYPOGRAPHY"
+                       Style="{StaticResource LabelSmall}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+            <TextBlock Text="Typeface"
+                       Style="{StaticResource LabelMedium}" />
+            <ComboBox x:Name="FontPicker"
+                      AutomationProperties.Name="Typeface"
+                      HorizontalAlignment="Stretch"
+                      SelectionChanged="OnTokenSelectionChanged">
+                <x:String>Theme default</x:String>
+                <x:String>Inter</x:String>
+                <x:String>Roboto</x:String>
+            </ComboBox>
+            <TextBlock x:Name="TypeLabel"
+                       Style="{StaticResource BodySmall}" />
+            <Slider x:Name="TypeSlider"
+                    AutomationProperties.Name="Typography scale"
+                    Minimum="0.85"
+                    Maximum="1.25"
+                    StepFrequency="0.05"
+                    Style="{StaticResource SliderStyle}"
+                    ValueChanged="OnTokenChanged" />
+            <TextBlock Text="Aa  The details make the difference."
+                       Style="{StaticResource TitleMedium}"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+        <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                Content="Reset design"
+                HorizontalAlignment="Stretch"
+                Style="{StaticResource OutlinedButtonStyle}"
+                Click="OnResetClick" />
+        <TextBlock Text="Workspace edits stay with you when you switch themes."
+                   Style="{StaticResource BodySmall}"
+                   TextWrapping="Wrap"
+                   Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,23 @@
+# Build output and local tools
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.log
+*.binlog
+*.nupkg
+TestResults/
+
+# Local verification evidence and temporary browser data
+verification/
+browser-profile/
+runtime-tests*.xml
+node_modules/
+
+# OS files and local credentials
+.DS_Store
+Thumbs.db
+.env
+.env.*

@@ -1,0 +1,23 @@
+<Project Sdk="Uno.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net10.0-desktop;net10.0-browserwasm</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<UnoSingleProject>true</UnoSingleProject>
+		<ApplicationTitle>Forma — Theme Studio</ApplicationTitle>
+		<ApplicationId>uno.themes.forma</ApplicationId>
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+		<UnoFeatures>SkiaRenderer</UnoFeatures>
+		<UnoDisableHotDesign>true</UnoDisableHotDesign>
+		<IsPackable>false</IsPackable>
+		<ThemesVersion>9.0.0-dev.2</ThemesVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<UnoIcon Include="Assets/icon.svg" Color="#6956D8" />
+		<UnoSplashScreen Include="Assets/splash.svg" Color="#FCFAFF" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Uno.Material.WinUI" Version="$(ThemesVersion)" />
+		<PackageReference Include="Uno.Simple.WinUI" Version="$(ThemesVersion)" />
+	</ItemGroup>
+</Project>

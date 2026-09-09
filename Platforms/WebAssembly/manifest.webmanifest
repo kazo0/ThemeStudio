@@ -1,0 +1,8 @@
+{
+	"name": "Forma — Theme Studio",
+	"short_name": "Forma",
+	"start_url": "./",
+	"display": "standalone",
+	"background_color": "#FCFAFF",
+	"theme_color": "#6956D8"
+}

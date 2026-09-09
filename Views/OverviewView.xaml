@@ -1,0 +1,491 @@
+<UserControl x:Class="ThemeStudio.Views.OverviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             SizeChanged="OnSizeChanged">
+    <StackPanel Spacing="{ThemeResource Space600}">
+        <StackPanel Spacing="{ThemeResource Space200}">
+            <TextBlock Text="WORKSPACE / OVERVIEW"
+                       TextWrapping="Wrap"
+                       Style="{StaticResource LabelSmall}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                       CharacterSpacing="130" />
+            <TextBlock Text="Make room for your next big idea."
+                       Style="{StaticResource DisplaySmall}"
+                       Foreground="{ThemeResource OnSurfaceBrush}"
+                       TextWrapping="Wrap"
+                       MaxWidth="660"
+                       HorizontalAlignment="Left" />
+            <TextBlock Text="A little clarity. A lot of possibility. Here’s what’s moving at Forma."
+                       Style="{StaticResource BodyMedium}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+
+        <Border Background="{ThemeResource PrimaryContainerBrush}"
+                CornerRadius="{ThemeResource Radius400CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <Grid x:Name="HeroGrid"
+                  ColumnSpacing="{ThemeResource Space400}"
+                  RowSpacing="{ThemeResource Space400}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="HeroTextColumn"
+                                      Width="3*" />
+                    <ColumnDefinition x:Name="HeroArtColumn"
+                                      Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="HeroText"
+                            Spacing="{ThemeResource Space400}"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="GOOD THINGS TAKE SHAPE"
+                               Style="{StaticResource LabelSmall}"
+                               Foreground="{ThemeResource OnPrimaryContainerBrush}"
+                               CharacterSpacing="100"
+                               TextWrapping="Wrap" />
+                    <TextBlock Text="Less busywork.&#x0a;More brilliant work."
+                               Style="{StaticResource HeadlineSmall}"
+                               Foreground="{ThemeResource OnPrimaryContainerBrush}"
+                               TextWrapping="Wrap" />
+                    <TextBlock Text="Your next chapter starts with a shared space to think, make, and move forward together."
+                               Style="{StaticResource BodyMedium}"
+                               Foreground="{ThemeResource OnPrimaryContainerBrush}"
+                               TextWrapping="Wrap"
+                               MaxWidth="340"
+                               HorizontalAlignment="Left" />
+                    <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                            Content="Explore projects"
+                            Style="{StaticResource FilledButtonStyle}"
+                            Click="OnOpenProjects"
+                            HorizontalAlignment="Left" />
+                </StackPanel>
+                <Viewbox x:Name="HeroArt"
+                         Grid.Column="1"
+                         Stretch="Uniform"
+                         MaxHeight="245"
+                         AutomationProperties.Name="Abstract illustration of a creative workspace">
+                    <Canvas Width="260"
+                            Height="250">
+                        <Ellipse Width="208"
+                                 Height="208"
+                                 Canvas.Left="25"
+                                 Canvas.Top="23"
+                                 Fill="{ThemeResource PrimaryBrush}"
+                                 Opacity="0.10" />
+                        <Border Width="142"
+                                Height="180"
+                                Canvas.Left="42"
+                                Canvas.Top="34"
+                                Background="{ThemeResource SurfaceBrush}"
+                                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="-13" />
+                            </Border.RenderTransform>
+                            <StackPanel Margin="18"
+                                        Spacing="12">
+                                <Border Width="48"
+                                        Height="7"
+                                        Background="{ThemeResource OutlineVariantBrush}"
+                                        CornerRadius="3"
+                                        HorizontalAlignment="Left" />
+                                <Border Height="76"
+                                        Background="{ThemeResource SecondaryContainerBrush}"
+                                        CornerRadius="{ThemeResource Radius200CornerRadius}">
+                                    <Grid>
+                                        <Ellipse Width="42"
+                                                 Height="42"
+                                                 Fill="{ThemeResource SecondaryBrush}"
+                                                 HorizontalAlignment="Left"
+                                                 Margin="12,0,0,0" />
+                                        <Rectangle Width="38"
+                                                   Height="38"
+                                                   Fill="{ThemeResource OnSecondaryContainerBrush}"
+                                                   HorizontalAlignment="Right"
+                                                   Margin="0,0,12,0"
+                                                   Opacity="0.6" />
+                                    </Grid>
+                                </Border>
+                                <Border Height="5"
+                                        Background="{ThemeResource OutlineVariantBrush}"
+                                        CornerRadius="2" />
+                                <Border Width="67"
+                                        Height="5"
+                                        Background="{ThemeResource OutlineVariantBrush}"
+                                        CornerRadius="2"
+                                        HorizontalAlignment="Left" />
+                            </StackPanel>
+                        </Border>
+                        <Border Width="113"
+                                Height="118"
+                                Canvas.Left="128"
+                                Canvas.Top="107"
+                                Background="{ThemeResource PrimaryBrush}"
+                                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <RotateTransform Angle="11" />
+                            </Border.RenderTransform>
+                            <Grid>
+                                <Ellipse Width="66"
+                                         Height="66"
+                                         Stroke="{ThemeResource OnPrimaryBrush}"
+                                         StrokeThickness="13" />
+                                <Rectangle Width="20"
+                                           Height="65"
+                                           Fill="{ThemeResource PrimaryBrush}"
+                                           HorizontalAlignment="Right"
+                                           Margin="0,0,13,0" />
+                            </Grid>
+                        </Border>
+                        <Ellipse Width="30"
+                                 Height="30"
+                                 Canvas.Left="205"
+                                 Canvas.Top="31"
+                                 Fill="{ThemeResource TertiaryBrush}" />
+                        <FontIcon Glyph="&#xE73E;"
+                                  FontSize="17"
+                                  Foreground="{ThemeResource OnTertiaryBrush}"
+                                  Canvas.Left="211"
+                                  Canvas.Top="37" />
+                        <Ellipse Width="14"
+                                 Height="14"
+                                 Canvas.Left="11"
+                                 Canvas.Top="195"
+                                 Fill="{ThemeResource SecondaryBrush}" />
+                    </Canvas>
+                </Viewbox>
+            </Grid>
+        </Border>
+
+        <Grid x:Name="MetricsGrid"
+              ColumnSpacing="{ThemeResource Space400}"
+              RowSpacing="{ThemeResource Space300}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition x:Name="MetricColumn2" />
+                <ColumnDefinition x:Name="MetricColumn3" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border x:Name="Metric1"
+                    Padding="{ThemeResource Space400Thickness}"
+                    Background="{ThemeResource SurfaceBrush}"
+                    BorderBrush="{ThemeResource OutlineVariantBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource Radius300CornerRadius}">
+                <StackPanel Spacing="{ThemeResource Space200}">
+                    <TextBlock Text="Active projects"
+                               TextWrapping="Wrap"
+                               Style="{StaticResource BodyMedium}"
+                               Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+                    <TextBlock x:Name="ActiveProjectsCount"
+                               Style="{StaticResource HeadlineSmall}"
+                               Foreground="{ThemeResource OnSurfaceBrush}" />
+                    <TextBlock Text="Ideas taking shape, together."
+                               Style="{StaticResource LabelSmall}"
+                               Foreground="{ThemeResource PrimaryBrush}"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+            <Border x:Name="Metric2"
+                    Grid.Column="1"
+                    Padding="{ThemeResource Space400Thickness}"
+                    Background="{ThemeResource SurfaceBrush}"
+                    BorderBrush="{ThemeResource OutlineVariantBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource Radius300CornerRadius}">
+                <StackPanel Spacing="{ThemeResource Space200}">
+                    <TextBlock Text="A team in sync"
+                               TextWrapping="Wrap"
+                               Style="{StaticResource BodyMedium}"
+                               Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+                    <TextBlock Text="08"
+                               Style="{StaticResource HeadlineSmall}"
+                               Foreground="{ThemeResource OnSurfaceBrush}" />
+                    <TextBlock Text="Good people. Shared momentum."
+                               Style="{StaticResource LabelSmall}"
+                               Foreground="{ThemeResource PrimaryBrush}"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+            <Border x:Name="Metric3"
+                    Grid.Column="2"
+                    Padding="{ThemeResource Space400Thickness}"
+                    Background="{ThemeResource SurfaceBrush}"
+                    BorderBrush="{ThemeResource OutlineVariantBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource Radius300CornerRadius}">
+                <StackPanel Spacing="{ThemeResource Space200}">
+                    <TextBlock Text="This week’s focus"
+                               TextWrapping="Wrap"
+                               Style="{StaticResource BodyMedium}"
+                               Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+                    <TextBlock Text="86%"
+                               Style="{StaticResource HeadlineSmall}"
+                               Foreground="{ThemeResource OnSurfaceBrush}" />
+                    <ProgressBar Value="86"
+                                 Maximum="100"
+                                 Style="{StaticResource ProgressBarStyle}"
+                                 AutomationProperties.Name="This week's focus, 86 percent" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid ColumnSpacing="{ThemeResource Space200}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Spacing="{ThemeResource Space100}">
+                <TextBlock Text="In the making"
+                           TextWrapping="Wrap"
+                           Style="{StaticResource TitleLarge}"
+                           Foreground="{ThemeResource OnSurfaceBrush}" />
+                <TextBlock Text="The work you’re bringing to life."
+                           Style="{StaticResource BodyMedium}"
+                           Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+            <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                    Grid.Column="1"
+                    Content="View all"
+                    Style="{StaticResource TextButtonStyle}"
+                    Click="OnOpenProjects"
+                    VerticalAlignment="Center" />
+        </Grid>
+
+        <Grid x:Name="ProjectsGrid"
+              ColumnSpacing="{ThemeResource Space400}"
+              RowSpacing="{ThemeResource Space400}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition x:Name="ProjectColumn2" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border x:Name="Project1"
+                    Background="{ThemeResource SurfaceBrush}"
+                    BorderBrush="{ThemeResource OutlineVariantBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource Radius300CornerRadius}"
+                    Padding="{ThemeResource Space400Thickness}">
+                <StackPanel Spacing="{ThemeResource Space400}">
+                    <Border Height="116"
+                            Background="{ThemeResource SecondaryContainerBrush}"
+                            CornerRadius="{ThemeResource Radius200CornerRadius}">
+                        <Viewbox Stretch="Uniform"
+                                 Margin="10">
+                            <Grid Width="250"
+                                  Height="96">
+                                <Ellipse Width="80"
+                                         Height="80"
+                                         Fill="{ThemeResource SecondaryBrush}"
+                                         HorizontalAlignment="Left"
+                                         Margin="39,0,0,0" />
+                                <Border Width="78"
+                                        Height="78"
+                                        Background="{ThemeResource OnSecondaryContainerBrush}"
+                                        CornerRadius="{ThemeResource Radius400CornerRadius}"
+                                        HorizontalAlignment="Right"
+                                        Margin="0,0,39,0"
+                                        RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <RotateTransform Angle="20" />
+                                    </Border.RenderTransform>
+                                </Border>
+                                <TextBlock Text="f"
+                                           FontSize="64"
+                                           Style="{StaticResource DisplaySmall}"
+                                           Foreground="{ThemeResource OnSecondaryBrush}"
+                                           HorizontalAlignment="Left"
+                                           Margin="63,-2,0,0" />
+                            </Grid>
+                        </Viewbox>
+                    </Border>
+                    <TextBlock Text="Orbit brand system"
+                               Style="{StaticResource TitleMedium}"
+                               Foreground="{ThemeResource OnSurfaceBrush}"
+                               TextWrapping="Wrap" />
+                    <TextBlock Text="A fresh identity for a new way of working."
+                               Style="{StaticResource BodyMedium}"
+                               Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                               TextWrapping="Wrap" />
+                    <Grid ColumnSpacing="{ThemeResource Space200}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="BRAND IDENTITY"
+                                   TextWrapping="Wrap"
+                                   Style="{StaticResource LabelSmall}"
+                                   Foreground="{ThemeResource SecondaryBrush}"
+                                   VerticalAlignment="Center" />
+                        <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                                Grid.Column="1"
+                                Content="Open"
+                                Style="{StaticResource FilledTonalButtonStyle}"
+                                Click="OnOpenProjects"
+                                AutomationProperties.Name="Open Orbit brand project" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border x:Name="Project2"
+                    Grid.Column="1"
+                    Background="{ThemeResource SurfaceBrush}"
+                    BorderBrush="{ThemeResource OutlineVariantBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource Radius300CornerRadius}"
+                    Padding="{ThemeResource Space400Thickness}">
+                <StackPanel Spacing="{ThemeResource Space400}">
+                    <Border Height="116"
+                            Background="{ThemeResource TertiaryContainerBrush}"
+                            CornerRadius="{ThemeResource Radius200CornerRadius}">
+                        <Viewbox Stretch="Uniform"
+                                 Margin="10">
+                            <Grid Width="250"
+                                  Height="96">
+                                <Border Width="152"
+                                        Height="76"
+                                        Background="{ThemeResource SurfaceBrush}"
+                                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                                        RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <RotateTransform Angle="-8" />
+                                    </Border.RenderTransform>
+                                    <Grid Margin="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="28" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Border Background="{ThemeResource TertiaryContainerBrush}"
+                                                CornerRadius="4" />
+                                        <StackPanel Grid.Column="1"
+                                                    Margin="10,4,0,0"
+                                                    Spacing="8">
+                                            <Border Height="5"
+                                                    Background="{ThemeResource TertiaryBrush}"
+                                                    CornerRadius="2" />
+                                            <Border Height="25"
+                                                    Background="{ThemeResource TertiaryContainerBrush}"
+                                                    CornerRadius="4" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                                <Ellipse Width="36"
+                                         Height="36"
+                                         Fill="{ThemeResource TertiaryBrush}"
+                                         HorizontalAlignment="Right"
+                                         VerticalAlignment="Bottom"
+                                         Margin="0,0,28,0" />
+                            </Grid>
+                        </Viewbox>
+                    </Border>
+                    <TextBlock Text="A quieter kind of inbox"
+                               Style="{StaticResource TitleMedium}"
+                               Foreground="{ThemeResource OnSurfaceBrush}"
+                               TextWrapping="Wrap" />
+                    <TextBlock Text="Thoughtful details for the next product chapter."
+                               Style="{StaticResource BodyMedium}"
+                               Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                               TextWrapping="Wrap" />
+                    <Grid ColumnSpacing="{ThemeResource Space200}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="PRODUCT DESIGN"
+                                   TextWrapping="Wrap"
+                                   Style="{StaticResource LabelSmall}"
+                                   Foreground="{ThemeResource TertiaryBrush}"
+                                   VerticalAlignment="Center" />
+                        <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                                Grid.Column="1"
+                                Content="Open"
+                                Style="{StaticResource FilledTonalButtonStyle}"
+                                Click="OnOpenProjects"
+                                AutomationProperties.Name="Open inbox product project" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Background="{ThemeResource SurfaceBrush}"
+                BorderBrush="{ThemeResource OutlineVariantBrush}"
+                BorderThickness="1"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <StackPanel Spacing="{ThemeResource Space400}">
+                <TextBlock Text="Small steps, shared progress"
+                           Style="{StaticResource TitleMedium}"
+                           Foreground="{ThemeResource OnSurfaceBrush}"
+                           TextWrapping="Wrap" />
+                <Grid ColumnSpacing="{ThemeResource Space300}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{ThemeResource PrimaryContainerBrush}"
+                            CornerRadius="{ThemeResource RadiusFullCornerRadius}"
+                            Width="40"
+                            Height="40"
+                            VerticalAlignment="Top">
+                        <TextBlock Text="JL"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnPrimaryContainerBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel Grid.Column="1"
+                                Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="Jun shared the first brand explorations"
+                                   Style="{StaticResource BodyMedium}"
+                                   Foreground="{ThemeResource OnSurfaceBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Text="Orbit brand system · 12 minutes ago"
+                                   Style="{StaticResource LabelSmall}"
+                                   Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+                <Border Height="1"
+                        Background="{ThemeResource OutlineVariantBrush}" />
+                <Grid ColumnSpacing="{ThemeResource Space300}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{ThemeResource TertiaryContainerBrush}"
+                            CornerRadius="{ThemeResource RadiusFullCornerRadius}"
+                            Width="40"
+                            Height="40"
+                            VerticalAlignment="Top">
+                        <TextBlock Text="AM"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnTertiaryContainerBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel Grid.Column="1"
+                                Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="Alex wrapped up the onboarding flow"
+                                   Style="{StaticResource BodyMedium}"
+                                   Foreground="{ThemeResource OnSurfaceBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Text="A quieter kind of inbox · 48 minutes ago"
+                                   Style="{StaticResource LabelSmall}"
+                                   Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

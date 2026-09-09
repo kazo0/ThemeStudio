@@ -1,0 +1,108 @@
+<UserControl x:Class="ThemeStudio.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Spacing="{ThemeResource Space600}">
+        <StackPanel Spacing="{ThemeResource Space200}">
+            <TextBlock Text="WORKSPACE / SETTINGS"
+                       Style="{StaticResource LabelSmall}"
+                       Foreground="{ThemeResource PrimaryBrush}" />
+            <TextBlock Text="Your space. Your pace."
+                       Style="{StaticResource DisplaySmall}"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="The small preferences that make a workspace feel like home."
+                       Style="{StaticResource BodyLarge}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+        <Border x:Name="ProfileCard"
+                Background="{ThemeResource SurfaceBrush}"
+                BorderBrush="{ThemeResource OutlineVariantBrush}"
+                BorderThickness="1"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <StackPanel Spacing="{ThemeResource Space500}">
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="{ThemeResource Space400}">
+                    <Border Background="{ThemeResource PrimaryContainerBrush}"
+                            CornerRadius="{ThemeResource Radius300CornerRadius}"
+                            Padding="{ThemeResource Space400Thickness}">
+                        <TextBlock Text="AM"
+                                   Style="{StaticResource HeadlineSmall}"
+                                   Foreground="{ThemeResource OnPrimaryContainerBrush}" />
+                    </Border>
+                    <StackPanel Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="Alex Morgan"
+                                   Style="{StaticResource TitleLarge}" />
+                        <TextBlock Text="Designer &amp; workspace owner"
+                                   Style="{StaticResource BodyMedium}"
+                                   Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+                <TextBox x:Name="WorkspaceNameInput"
+                         Header="Workspace name"
+                         Text="{Binding WorkspaceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="80"
+                         Style="{StaticResource OutlinedTextBoxStyle}" />
+                <TextBox x:Name="EmailInput"
+                         Header="Email address"
+                         Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource OutlinedTextBoxStyle}" />
+                <TextBlock x:Name="ValidationMessage"
+                           Text="Add a workspace name and a valid email address."
+                           Style="{StaticResource BodySmall}"
+                           Foreground="{ThemeResource ErrorBrush}"
+                           Visibility="Collapsed"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+        <Border Background="{ThemeResource SurfaceBrush}"
+                BorderBrush="{ThemeResource OutlineVariantBrush}"
+                BorderThickness="1"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <StackPanel Spacing="{ThemeResource Space400}">
+                <TextBlock Text="Stay in the loop"
+                           Style="{StaticResource TitleLarge}" />
+                <TextBlock Text="Choose the updates that deserve your attention."
+                           Style="{StaticResource BodyMedium}"
+                           Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                           TextWrapping="Wrap" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="Project activity notifications"
+                               Style="{StaticResource BodyMedium}"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Center" />
+                    <ToggleSwitch Grid.Column="1"
+                                  AutomationProperties.Name="Project activity notifications"
+                                  IsOn="{Binding Notifications, Mode=TwoWay}"
+                                  Style="{StaticResource ToggleSwitchStyle}" />
+                </Grid>
+                <CheckBox Content="Send me a weekly workspace digest"
+                          IsChecked="{Binding Digest, Mode=TwoWay}"
+                          Style="{StaticResource CheckBoxStyle}" />
+            </StackPanel>
+        </Border>
+        <Border Background="{ThemeResource TertiaryContainerBrush}"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <StackPanel Spacing="{ThemeResource Space200}">
+                <TextBlock Text="Built for your next chapter"
+                           Style="{StaticResource TitleLarge}"
+                           Foreground="{ThemeResource OnTertiaryContainerBrush}"
+                           TextWrapping="Wrap" />
+                <TextBlock Text="Your Studio plan includes unlimited ideas, a shared space for your team, and a little room to grow."
+                           Style="{StaticResource BodyMedium}"
+                           Foreground="{ThemeResource OnTertiaryContainerBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+        <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                Content="Save preferences"
+                HorizontalAlignment="Left"
+                Style="{StaticResource FilledButtonStyle}"
+                Click="OnSaveClick" />
+    </StackPanel>
+</UserControl>

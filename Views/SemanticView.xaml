@@ -1,0 +1,232 @@
+<UserControl x:Class="ThemeStudio.Views.SemanticView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Spacing="{ThemeResource Space600}">
+        <StackPanel Spacing="{ThemeResource Space200}">
+            <TextBlock Text="THE PLAYGROUND / SEMANTIC LAB"
+                       Style="{StaticResource LabelSmall}"
+                       Foreground="{ThemeResource PrimaryBrush}" />
+            <TextBlock Text="Same language. New expression."
+                       Style="{StaticResource DisplaySmall}"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="Switch the design system. These controls keep their semantic keys and pick up a whole new personality."
+                       Style="{StaticResource BodyLarge}"
+                       Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+        <Border Background="{ThemeResource SurfaceBrush}"
+                BorderBrush="{ThemeResource OutlineVariantBrush}"
+                BorderThickness="1"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <StackPanel Spacing="{ThemeResource Space400}">
+                <TextBlock Text="Actions with intention"
+                           Style="{StaticResource TitleLarge}" />
+                <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                        Content="Publish your idea"
+                        Style="{StaticResource FilledButtonStyle}"
+                        HorizontalAlignment="Left"
+                        Click="OnActionClick" />
+                <TextBlock Text="FilledButtonStyle"
+                           Style="{StaticResource BodySmall}"
+                           Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+                <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                        Content="Save a draft"
+                        Style="{StaticResource FilledTonalButtonStyle}"
+                        HorizontalAlignment="Left"
+                        Click="OnActionClick" />
+                <TextBlock Text="FilledTonalButtonStyle"
+                           Style="{StaticResource BodySmall}"
+                           Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+                <Button FontSize="{ThemeResource LabelLargeFontSize}"
+                        Content="Explore the possibilities"
+                        Style="{StaticResource TextButtonStyle}"
+                        HorizontalAlignment="Left"
+                        Click="OnActionClick" />
+                <TextBlock Text="TextButtonStyle"
+                           Style="{StaticResource BodySmall}"
+                           Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+            </StackPanel>
+        </Border>
+        <TextBlock Text="A palette with purpose"
+                   Style="{StaticResource TitleLarge}" />
+        <StackPanel Spacing="{ThemeResource Space200}">
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="{ThemeResource Space200}">
+                <Border x:Name="PrimaryTile"
+                        Grid.Column="0"
+                        Background="{ThemeResource PrimaryBrush}"
+                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                        Padding="{ThemeResource Space400Thickness}">
+                    <StackPanel Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="PrimaryBrush"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnPrimaryBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="PrimaryHex"
+                                   Style="{StaticResource BodySmall}"
+                                   Foreground="{ThemeResource OnPrimaryBrush}" />
+                    </StackPanel>
+                </Border>
+                <Border x:Name="PrimaryContainerTile"
+                        Grid.Column="1"
+                        Background="{ThemeResource PrimaryContainerBrush}"
+                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                        Padding="{ThemeResource Space400Thickness}">
+                    <StackPanel Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="PrimaryContainerBrush"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnPrimaryContainerBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="PrimaryContainerHex"
+                                   Style="{StaticResource BodySmall}"
+                                   Foreground="{ThemeResource OnPrimaryContainerBrush}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="{ThemeResource Space200}">
+                <Border x:Name="SecondaryTile"
+                        Grid.Column="0"
+                        Background="{ThemeResource SecondaryBrush}"
+                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                        Padding="{ThemeResource Space400Thickness}">
+                    <StackPanel Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="SecondaryBrush"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="SecondaryHex"
+                                   Style="{StaticResource BodySmall}"
+                                   Foreground="{ThemeResource OnSecondaryBrush}" />
+                    </StackPanel>
+                </Border>
+                <Border x:Name="SecondaryContainerTile"
+                        Grid.Column="1"
+                        Background="{ThemeResource SecondaryContainerBrush}"
+                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                        Padding="{ThemeResource Space400Thickness}">
+                    <StackPanel Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="SecondaryContainerBrush"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnSecondaryContainerBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="SecondaryContainerHex"
+                                   Style="{StaticResource BodySmall}"
+                                   Foreground="{ThemeResource OnSecondaryContainerBrush}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="{ThemeResource Space200}">
+                <Border x:Name="TertiaryTile"
+                        Grid.Column="0"
+                        Background="{ThemeResource TertiaryBrush}"
+                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                        Padding="{ThemeResource Space400Thickness}">
+                    <StackPanel Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="TertiaryBrush"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnTertiaryBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="TertiaryHex"
+                                   Style="{StaticResource BodySmall}"
+                                   Foreground="{ThemeResource OnTertiaryBrush}" />
+                    </StackPanel>
+                </Border>
+                <Border x:Name="TertiaryContainerTile"
+                        Grid.Column="1"
+                        Background="{ThemeResource TertiaryContainerBrush}"
+                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                        Padding="{ThemeResource Space400Thickness}">
+                    <StackPanel Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="TertiaryContainerBrush"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnTertiaryContainerBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="TertiaryContainerHex"
+                                   Style="{StaticResource BodySmall}"
+                                   Foreground="{ThemeResource OnTertiaryContainerBrush}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="{ThemeResource Space200}">
+                <Border x:Name="ErrorTile"
+                        Grid.Column="0"
+                        Background="{ThemeResource ErrorBrush}"
+                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                        Padding="{ThemeResource Space400Thickness}">
+                    <StackPanel Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="ErrorBrush"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnErrorBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="ErrorHex"
+                                   Style="{StaticResource BodySmall}"
+                                   Foreground="{ThemeResource OnErrorBrush}" />
+                    </StackPanel>
+                </Border>
+                <Border x:Name="ErrorContainerTile"
+                        Grid.Column="1"
+                        Background="{ThemeResource ErrorContainerBrush}"
+                        CornerRadius="{ThemeResource Radius200CornerRadius}"
+                        Padding="{ThemeResource Space400Thickness}">
+                    <StackPanel Spacing="{ThemeResource Space100}">
+                        <TextBlock Text="ErrorContainerBrush"
+                                   Style="{StaticResource LabelMedium}"
+                                   Foreground="{ThemeResource OnErrorContainerBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="ErrorContainerHex"
+                                   Style="{StaticResource BodySmall}"
+                                   Foreground="{ThemeResource OnErrorContainerBrush}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+        <Border Background="{ThemeResource SurfaceBrush}"
+                BorderBrush="{ThemeResource OutlineVariantBrush}"
+                BorderThickness="1"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <StackPanel Spacing="{ThemeResource Space300}">
+                <TextBlock Text="A type scale that travels"
+                           Style="{StaticResource TitleLarge}" />
+                <TextBlock Text="Make something meaningful."
+                           Style="{StaticResource HeadlineMedium}"
+                           TextWrapping="Wrap" />
+                <TextBlock Text="HeadlineMedium"
+                           Style="{StaticResource LabelSmall}"
+                           Foreground="{ThemeResource PrimaryBrush}" />
+                <TextBlock Text="Every detail is part of the story."
+                           Style="{StaticResource TitleMedium}"
+                           TextWrapping="Wrap" />
+                <TextBlock Text="TitleMedium"
+                           Style="{StaticResource LabelSmall}"
+                           Foreground="{ThemeResource PrimaryBrush}" />
+                <TextBlock Text="A shared typeface, considered proportions, and a rhythm that feels right. Change the font or scale and watch every screen respond."
+                           Style="{StaticResource BodyMedium}"
+                           TextWrapping="Wrap" />
+                <TextBlock Text="BodyMedium"
+                           Style="{StaticResource LabelSmall}"
+                           Foreground="{ThemeResource PrimaryBrush}" />
+            </StackPanel>
+        </Border>
+        <TextBlock Text="Tokens, resolved live"
+                   Style="{StaticResource TitleLarge}" />
+        <TextBlock x:Name="TokenValues"
+                   Style="{StaticResource BodyMedium}"
+                   TextWrapping="Wrap"
+                   IsTextSelectionEnabled="True" />
+        <Border Background="{ThemeResource SurfaceInverseBrush}"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                Padding="{ThemeResource Space600Thickness}">
+            <TextBlock Text="&lt;Button Style=&quot;{StaticResource FilledButtonStyle}&quot;&#10;        Content=&quot;Publish your idea&quot; /&gt;"
+                       Foreground="{ThemeResource OnSurfaceInverseBrush}"
+                       FontFamily="Consolas"
+                       FontSize="13"
+                       TextWrapping="Wrap"
+                       IsTextSelectionEnabled="True" />
+        </Border>
+    </StackPanel>
+</UserControl>
