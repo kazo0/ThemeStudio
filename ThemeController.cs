@@ -1,6 +1,7 @@
 using System.Globalization;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Cupertino;
 using Uno.Material;
 using Uno.Simple;
 using Uno.Themes;
@@ -24,7 +25,12 @@ internal sealed class ThemeController(StudioState state)
 	{
 		var dictionaries = Application.Current.Resources.MergedDictionaries;
 		if (_active is not null) dictionaries.Remove(_active);
-		_active = state.IsMaterial ? new MaterialTheme() : new SimpleTheme();
+		_active = state.DesignSystem switch
+		{
+			DesignSystem.Material => new MaterialTheme(),
+			DesignSystem.Cupertino => new CupertinoTheme(),
+			_ => new SimpleTheme()
+		};
 		dictionaries.Add(_active);
 		_fontSizes.Clear();
 		foreach (var slot in TypographySlots)

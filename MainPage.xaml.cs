@@ -76,7 +76,7 @@ public sealed partial class MainPage : Page
 	private void UpdateLabels()
 	{
 		AppearanceButton.Content = _state.IsDark ? "Light mode" : "Dark mode";
-		ThemeLabel.Text = $"{(_state.IsMaterial ? "MATERIAL" : "SIMPLE")}  /  {(_state.IsDark ? "DARK" : "LIGHT")}";
+		ThemeLabel.Text = $"{_state.DesignSystem.ToString().ToUpperInvariant()}  /  {(_state.IsDark ? "DARK" : "LIGHT")}";
 		ArrangeWorkspace(ActualWidth);
 	}
 

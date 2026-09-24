@@ -8,6 +8,7 @@ obj/
 *.log
 *.binlog
 *.nupkg
+!packages/.gitkeep
 TestResults/
 
 # Local verification evidence and temporary browser data

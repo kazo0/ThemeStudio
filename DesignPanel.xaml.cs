@@ -36,18 +36,17 @@ public sealed partial class DesignPanel : UserControl
 		FontPicker.SelectedIndex = _state.FontIndex;
 		TypeSlider.Value = _state.TypeScale;
 		PresetPicker.SelectedIndex = 0;
-		SimpleButton.Style = (Style)Application.Current.Resources[_state.IsMaterial ? "FilledTonalButtonStyle" : "FilledButtonStyle"];
-		MaterialButton.Style = (Style)Application.Current.Resources[_state.IsMaterial ? "FilledButtonStyle" : "FilledTonalButtonStyle"];
+		foreach (var button in new[] { SimpleButton, MaterialButton, CupertinoButton })
+			button.Style = (Style)Application.Current.Resources[Enum.Parse<DesignSystem>((string)button.Tag) == _state.DesignSystem ? "FilledButtonStyle" : "FilledTonalButtonStyle"];
 		UpdateLabels();
 		_ready = true;
 	}
 
-	private void OnSimpleClick(object sender, RoutedEventArgs e) => SwitchTheme(false);
-	private void OnMaterialClick(object sender, RoutedEventArgs e) => SwitchTheme(true);
-	private void SwitchTheme(bool material)
+	private void OnDesignSystemClick(object sender, RoutedEventArgs e) => SwitchTheme(Enum.Parse<DesignSystem>((string)((Button)sender).Tag));
+	private void SwitchTheme(DesignSystem system)
 	{
-		if (_state.IsMaterial == material) return;
-		_state.IsMaterial = material;
+		if (_state.DesignSystem == system) return;
+		_state.DesignSystem = system;
 		_refresh.Stop();
 		ThemeChanged?.Invoke(this, EventArgs.Empty);
 	}
@@ -138,7 +137,7 @@ public sealed partial class DesignPanel : UserControl
 
 	private void OnResetClick(object sender, RoutedEventArgs e)
 	{
-		_state.IsMaterial = false;
+		_state.DesignSystem = DesignSystem.Simple;
 		_state.IsDark = false;
 		_state.PrimarySeed = "#6956D8";
 		_state.SecondarySeed = "#537C77";

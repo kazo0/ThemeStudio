@@ -1,4 +1,4 @@
-<Project Sdk="Uno.Sdk">
+<Project Sdk="Uno.Sdk.Private">
 	<PropertyGroup>
 		<TargetFrameworks>net10.0-desktop;net10.0-browserwasm</TargetFrameworks>
 		<OutputType>Exe</OutputType>
@@ -9,8 +9,11 @@
 		<ApplicationVersion>1</ApplicationVersion>
 		<UnoFeatures>SkiaRenderer</UnoFeatures>
 		<UnoDisableHotDesign>true</UnoDisableHotDesign>
+		<!-- Uno 7 dev: the Debug-only App MCP client loads SkiaSharp.Views.Windows 3.119, which Uno 7 (SkiaSharp 4) does not ship, so startup throws. -->
+		<UnoDisableMCPSupport>true</UnoDisableMCPSupport>
 		<IsPackable>false</IsPackable>
-		<ThemesVersion>9.0.0-dev.2</ThemesVersion>
+		<!-- Packed from the Uno.Themes dev/sb/cupertino-v2 branch by pack-themes.ps1 into ./packages. -->
+		<ThemesVersion>9.0.0-cupertino-v2-local</ThemesVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<UnoIcon Include="Assets/icon.svg" Color="#6956D8" />
@@ -19,5 +22,6 @@
 	<ItemGroup>
 		<PackageReference Include="Uno.Material.WinUI" Version="$(ThemesVersion)" />
 		<PackageReference Include="Uno.Simple.WinUI" Version="$(ThemesVersion)" />
+		<PackageReference Include="Uno.Cupertino.WinUI" Version="$(ThemesVersion)" />
 	</ItemGroup>
 </Project>

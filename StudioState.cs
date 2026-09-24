@@ -15,17 +15,24 @@ public abstract class ObservableState : INotifyPropertyChanged
 	}
 }
 
+public enum DesignSystem
+{
+	Simple,
+	Material,
+	Cupertino
+}
+
 [Microsoft.UI.Xaml.Data.Bindable]
 public sealed class StudioState : ObservableState
 {
-	public bool IsMaterial { get; set; }
+	public DesignSystem DesignSystem { get; set; }
 	public bool IsDark { get; set; }
 	public bool PanelVisible { get; set; } = true;
 	public string Page { get; set; } = "Overview";
 	public string PrimarySeed { get; set; } = "#6956D8";
 	public string SecondarySeed { get; set; } = "#537C77";
 	public string TertiarySeed { get; set; } = "#C78356";
-	public bool UseSeeds { get; set; } = true;
+	public bool UseSeeds { get; set; }
 	public double CornerRadius { get; set; } = 4;
 	public double Spacing { get; set; } = 4;
 	public int DensityIndex { get; set; } = 1;

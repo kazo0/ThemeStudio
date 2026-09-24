@@ -19,7 +19,7 @@ public sealed partial class App : Application
 		MainWindow.Content = new MainPage();
 #if !__WASM__
 		MainWindow.AppWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 1500, Height = 1050 });
-		if (Arguments.Contains("--smoke")) ((FrameworkElement)MainWindow.Content).Loaded += OnSmokeLoaded;
+		if (Arguments.Contains("--smoke") || Arguments.Contains("--blog")) ((FrameworkElement)MainWindow.Content).Loaded += OnSmokeLoaded;
 #endif
 		MainWindow.Activate();
 	}
@@ -30,7 +30,7 @@ public sealed partial class App : Application
 		try
 		{
 			((FrameworkElement)sender).Loaded -= OnSmokeLoaded;
-			await SmokeRunner.RunAsync();
+			await (Arguments.Contains("--blog") ? BlogCaptures.RunAsync() : SmokeRunner.RunAsync());
 		}
 		catch (Exception exception)
 		{
