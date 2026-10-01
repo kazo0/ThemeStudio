@@ -1,12 +1,12 @@
 # ThemeStudio
 
-A live Uno Platform demo of **Simple**, **Material**, **Cupertino**, and their shared semantic design language. Explore a fictional creative workspace called Forma while changing its entire design system in real time.
+A live Uno Platform demo of **Simple**, **Material**, and their shared semantic design language. Explore a fictional creative workspace called Forma while changing its entire design system in real time.
 
 ![Forma workspace in ThemeStudio](docs/overview.png)
 
 ## Explore
 
-- Switch **Simple ↔ Material ↔ Cupertino** without losing form edits, new projects, or unfinished drafts.
+- Switch **Simple ↔ Material** without losing form edits, new projects, or unfinished drafts.
 - Change primary, secondary, and tertiary **seed colors** live, use the color picker, or try a preset.
 - Adjust **corner radius, spacing, density, typeface, and typography scale** across the screens.
 - Compare **light and dark** appearances and inspect paired semantic colors and resolved tokens in the **Lab**.
@@ -17,27 +17,19 @@ All data stays in memory for the current session. Project progress and activity 
 
 ## Get started
 
-Install the [.NET SDK](https://dotnet.microsoft.com/download) version specified in `global.json` (10.0.303, or a later 10.0.3xx patch). For the browser target, install its matching workload:
+Install the [.NET SDK](https://dotnet.microsoft.com/download) version specified in `global.json` (10.0.401, or a later 10.0.4xx patch). For the browser target, install its matching workload:
 
 ```shell
 dotnet workload install wasm-tools
 ```
 
-Clone the repository next to an [Uno.Themes](https://github.com/unoplatform/Uno.Themes) checkout of the
-`dev/sb/cupertino-v2` branch, pack the theme libraries from it, then run commands from the repository root:
+Then run commands from the repository root:
 
 ```shell
 git clone https://github.com/kazo0/ThemeStudio.git
-git clone -b dev/sb/cupertino-v2 https://github.com/unoplatform/Uno.Themes.git uno.themes
 cd ThemeStudio
-./pack-themes.sh        # macOS / Linux; on Windows: ./pack-themes.ps1
 dotnet run --project ThemeStudio.csproj -f net10.0-desktop
 ```
-
-`pack-themes.sh` and `pack-themes.ps1` do the same thing; the PowerShell one also runs under PowerShell 7 on macOS. They build `Uno.Themes.WinUI`, `Uno.Material.WinUI`, `Uno.Simple.WinUI` and `Uno.Cupertino.WinUI` from
-the checkout into `packages/`, the local feed `nuget.config` adds. For a checkout elsewhere, pass its path
-(`./pack-themes.sh ../path/to/uno.themes` or `./pack-themes.ps1 -ThemesPath ../path/to/uno.themes`). Rerun it
-after pulling the branch; it clears the cached copies of the local version so the next restore picks the new build up.
 
 For WebAssembly:
 
@@ -49,24 +41,21 @@ Open <http://localhost:5127> if the browser does not open automatically. Windows
 
 ## Packages
 
-Cupertino v2 is not published yet, so the four theme packages come from the Uno.Themes `dev/sb/cupertino-v2` branch
-through `pack-themes.sh` / `pack-themes.ps1` and the local `packages/` feed. Everything else restores from the public nuget.org feed; no
-private feed or credentials are required.
+Everything restores from the public nuget.org feed; no private feed or credentials are required.
 
 | Component | Pinned version | Source |
 | --- | --- | --- |
-| Uno SDK (`Uno.Sdk.Private`) | `7.0.0-dev.701` | nuget.org, matching the branch |
-| Uno.Themes.WinUI, Uno.Material.WinUI, Uno.Simple.WinUI, Uno.Cupertino.WinUI | `9.0.0-cupertino-v2-local` | `packages/`, from `pack-themes.sh` / `pack-themes.ps1` |
+| Uno SDK (`Uno.Sdk.Private`) | `7.0.0-dev.701` | nuget.org |
+| Uno.Material.WinUI, Uno.Simple.WinUI | `9.0.0-dev.29` | nuget.org |
 
-All four theme packages are packed from the same checkout because Material and Simple use Uno.Themes internals, so they
-must match the Uno.Themes.WinUI that Cupertino needs. They are pinned together through `ThemesVersion` in
-`ThemeStudio.csproj`. The branch builds against Uno 7.0.0-dev.701, so the app uses the same SDK. That SDK's Debug-only
-App MCP client loads an assembly Uno 7 does not ship, so `UnoDisableMCPSupport` is set, as in the Uno.Themes sample apps.
-Once Cupertino v2 ships on nuget.org, point `ThemesVersion` at the published version and remove the local feed.
+Material and Simple use Uno.Themes internals, so they are pinned together through `ThemesVersion` in
+`ThemeStudio.csproj`. Uno.Themes 9.0.0-dev.29 builds against Uno 7.0.0-dev.701, so the app uses the same SDK. That SDK's
+Debug-only App MCP client loads an assembly Uno 7 does not ship, so `UnoDisableMCPSupport` is set, as in the Uno.Themes
+sample apps.
 
 ## A short presentation walkthrough
 
-1. Start on **Overview**, then switch **Simple → Material → Cupertino → Simple**. Observe the same semantic keys producing different control templates and typography: Cupertino brings iOS capsule buttons, grouped fields and switches, and Liquid Glass surfaces.
+1. Start on **Overview**, then switch **Simple → Material → Simple**. Observe the same semantic keys producing different control templates and typography.
 2. Try **Botanical**, **Terracotta**, and **Ocean at night**. Turn **Seed colors** on and edit a seed color, or turn it back off to restore the theme's default palette.
 3. Move **Corner radius** and **Spacing**. Compare **Compact**, **Regular**, and **Comfy**. Density scales spacing by 0.75, 1, or 1.25; fixed control heights remain constant.
 4. Switch between **Inter**, **Roboto**, and the theme's default typeface, then change **Type scale**.
@@ -76,7 +65,7 @@ Once Cupertino v2 ships on nuget.org, point `ThemesVersion` at the published ver
 
 ## Implementation
 
-`ThemeController` installs one `BaseTheme` (`SimpleTheme`, `MaterialTheme` or `CupertinoTheme`) in application resources. Views use semantic styles such as `FilledButtonStyle`, semantic typography such as `BodyMedium`, and paired semantic brushes.
+`ThemeController` installs one `BaseTheme` (`SimpleTheme` or `MaterialTheme`) in application resources. Views use semantic styles such as `FilledButtonStyle`, semantic typography such as `BodyMedium`, and paired semantic brushes.
 
 Seed changes through `ThemeColors` update existing brush instances. `DefaultCornerRadius`, `DefaultSpacing`, `DefaultDensity`, and `DefaultFontFamily` regenerate the real theme tokens. `FontOverrideDictionary` scales the active theme's original typography sizes. A root `RequestedTheme` refresh makes existing controls resolve updated immutable tokens; this demo technique follows the Uno.Themes samples.
 
@@ -85,7 +74,6 @@ Changing design systems rebuilds the view tree to resolve the new templates. Sty
 ## Validate
 
 ```shell
-./pack-themes.sh    # or ./pack-themes.ps1 on Windows
 dotnet build ThemeStudio.csproj -f net10.0-desktop
 dotnet build ThemeStudio.csproj -f net10.0-browserwasm
 dotnet bin/Debug/net10.0-desktop/ThemeStudio.dll --smoke

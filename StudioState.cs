@@ -18,8 +18,7 @@ public abstract class ObservableState : INotifyPropertyChanged
 public enum DesignSystem
 {
 	Simple,
-	Material,
-	Cupertino
+	Material
 }
 
 [Microsoft.UI.Xaml.Data.Bindable]

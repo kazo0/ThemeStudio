@@ -32,6 +32,7 @@ internal static class SmokeRunner
 			await SettleAsync();
 			Find<TextBox>("WorkspaceNameInput").Text = "A workspace that stays";
 			Check(state.WorkspaceName == "A workspace that stays", "Text input updates durable state");
+			Find<ToggleSwitch>("SeedToggle").IsOn = true;
 			var buttonStyle = Application.Current.Resources["FilledButtonStyle"];
 			Click("MaterialButton");
 			await SettleAsync();
@@ -53,18 +54,6 @@ internal static class SmokeRunner
 			await SettleAsync();
 			Check(App.Themes.Active is Uno.Simple.SimpleTheme, "Simple button restores SimpleTheme");
 			Check(Find<TextBox>("WorkspaceNameInput").Text == "A workspace that stays", "Form text survives the return switch");
-			var simpleButtonStyle = Application.Current.Resources["FilledButtonStyle"];
-			Click("CupertinoButton");
-			await SettleAsync();
-			Check(App.Themes.Active is Uno.Cupertino.CupertinoTheme, "Cupertino button installs CupertinoTheme");
-			Check(!ReferenceEquals(simpleButtonStyle, Application.Current.Resources["FilledButtonStyle"]), "Semantic key resolves Cupertino's style");
-			Check(Application.Current.Resources["CupertinoSeparatorBrush"] is SolidColorBrush, "Cupertino vocabulary is available");
-			Check(Find<TextBox>("WorkspaceNameInput").Text == "A workspace that stays", "Form text survives a switch to Cupertino");
-			Check(Find<TextBlock>("ThemeLabel").Text.StartsWith("CUPERTINO"), "Top bar names the active design system");
-			await CaptureAsync("02b-cupertino-settings");
-			Click("SimpleButton");
-			await SettleAsync();
-			Check(App.Themes.Active is Uno.Simple.SimpleTheme, "Simple button restores SimpleTheme after Cupertino");
 
 			var primary = (SolidColorBrush)Application.Current.Resources["PrimaryBrush"];
 			var previous = primary.Color;
@@ -116,13 +105,13 @@ internal static class SmokeRunner
 			await SettleAsync();
 			Check((CurrentPage).ActualTheme == ElementTheme.Dark, "Appearance control changes to dark");
 			await CaptureAsync("04-material-dark-projects");
-			Click("CupertinoButton");
+			Click("SimpleButton");
 			await SettleAsync();
-			Check(App.Themes.Active is Uno.Cupertino.CupertinoTheme && CurrentPage.ActualTheme == ElementTheme.Dark, "Cupertino keeps the dark appearance");
-			Check(state.Projects.Count == count + 1, "Created project survives a switch to Cupertino");
+			Check(App.Themes.Active is Uno.Simple.SimpleTheme && CurrentPage.ActualTheme == ElementTheme.Dark, "Simple keeps the dark appearance");
+			Check(state.Projects.Count == count + 1, "Created project survives a switch back to Simple");
 			(CurrentPage).Navigate("Semantic lab");
 			await SettleAsync();
-			Check(Find<TextBlock>("TokenValues").Text.Contains("Space400"), "Semantic lab resolves current tokens under Cupertino");
+			Check(Find<TextBlock>("TokenValues").Text.Contains("Space400"), "Semantic lab resolves current tokens under Simple");
 			var darkPrimary = ((SolidColorBrush)Find<Border>("PrimaryTile").Background).Color;
 			Click("AppearanceButton");
 			await SettleAsync();

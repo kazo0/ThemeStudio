@@ -1,7 +1,6 @@
 using System.Globalization;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
-using Uno.Cupertino;
 using Uno.Material;
 using Uno.Simple;
 using Uno.Themes;
@@ -28,7 +27,6 @@ internal sealed class ThemeController(StudioState state)
 		_active = state.DesignSystem switch
 		{
 			DesignSystem.Material => new MaterialTheme(),
-			DesignSystem.Cupertino => new CupertinoTheme(),
 			_ => new SimpleTheme()
 		};
 		dictionaries.Add(_active);
