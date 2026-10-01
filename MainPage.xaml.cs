@@ -16,6 +16,8 @@ public sealed partial class MainPage : Page
 		RequestedTheme = _state.IsDark ? ElementTheme.Dark : ElementTheme.Light;
 		Inspector.ThemeChanged += OnThemeChanged;
 		Inspector.TokensChanged += OnTokensChanged;
+		RepoQrCode.Source = RepoLink.CreateQrCode();
+		RepoUrl.Text = "github.com/kazo0/ThemeStudio";
 		_ready = true;
 		Navigate(_state.Page);
 		UpdateLabels();

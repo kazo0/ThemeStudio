@@ -12,6 +12,7 @@ A live Uno Platform demo of **Simple**, **Material**, and their shared semantic 
 - Compare **light and dark** appearances and inspect paired semantic colors and resolved tokens in the **Lab**.
 - Explore an illustrated dashboard, create and search projects, and edit workspace preferences.
 - Hide the design panel for presentations or resize to a narrow viewport for compact navigation.
+- A QR code to this repository stays pinned to the bottom-left corner so an audience can scan it while you present.
 
 All data stays in memory for the current session. Project progress and activity are illustrative; there is no backend or account setup.
 

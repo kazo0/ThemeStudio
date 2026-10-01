@@ -132,6 +132,15 @@ internal static class SmokeRunner
 			await SettleAsync();
 			Check(Find<ComboBox>("CompactNavigation").Visibility == Visibility.Visible, "Narrow viewport exposes compact navigation");
 			await CaptureAsync("06-narrow-overview");
+			var qrCode = Find<Image>("RepoQrCode");
+			Check(qrCode.Source is WriteableBitmap { PixelWidth: > 0 } code && code.PixelWidth == code.PixelHeight && qrCode.ActualWidth > 0,
+				"Narrow viewport keeps the repository QR code on screen");
+			App.MainWindow.AppWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 1280, Height = 900 });
+			await SettleAsync();
+			var corner = Find<FrameworkElement>("RepoCode").TransformToVisual(CurrentPage).TransformPoint(default);
+			Check(corner.X < 20 && corner.Y + Find<FrameworkElement>("RepoCode").ActualHeight > CurrentPage.ActualHeight - 60,
+				$"Repository QR code sits in the bottom-left corner (at {corner})");
+			await CaptureAsync("07-repo-code");
 			await File.WriteAllLinesAsync(Path.Combine(OutputDirectory, "results.txt"), Results);
 			Console.WriteLine($"SMOKE PASSED: {Results.Count} assertions. {OutputDirectory}");
 			Environment.Exit(0);
@@ -167,10 +176,10 @@ internal static class SmokeRunner
 		.OfType<Button>().First(button => button.Content is string text && text == content));
 	private static void Invoke(Button button) => ((IInvokeProvider)new ButtonAutomationPeer(button)).Invoke();
 
-	private static async Task CaptureAsync(string name)
+	private static async Task CaptureAsync(string name, UIElement? element = null)
 	{
 		var bitmap = new RenderTargetBitmap();
-		await bitmap.RenderAsync(App.MainWindow.Content);
+		await bitmap.RenderAsync(element ?? App.MainWindow.Content);
 		var pixels = await bitmap.GetPixelsAsync();
 		var file = await StorageFile.GetFileFromPathAsync(CreateImageFile(name));
 		using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
