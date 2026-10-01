@@ -36,7 +36,7 @@ public sealed partial class DesignPanel : UserControl
 		FontPicker.SelectedIndex = _state.FontIndex;
 		TypeSlider.Value = _state.TypeScale;
 		PresetPicker.SelectedIndex = 0;
-		foreach (var button in new[] { SimpleButton, MaterialButton, CupertinoButton })
+		foreach (var button in new[] { SimpleButton, MaterialButton })
 			button.Style = (Style)Application.Current.Resources[Enum.Parse<DesignSystem>((string)button.Tag) == _state.DesignSystem ? "FilledButtonStyle" : "FilledTonalButtonStyle"];
 		UpdateLabels();
 		_ready = true;

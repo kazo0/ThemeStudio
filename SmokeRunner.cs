@@ -32,6 +32,7 @@ internal static class SmokeRunner
 			await SettleAsync();
 			Find<TextBox>("WorkspaceNameInput").Text = "A workspace that stays";
 			Check(state.WorkspaceName == "A workspace that stays", "Text input updates durable state");
+			Find<ToggleSwitch>("SeedToggle").IsOn = true;
 			var buttonStyle = Application.Current.Resources["FilledButtonStyle"];
 			Click("MaterialButton");
 			await SettleAsync();
@@ -53,18 +54,6 @@ internal static class SmokeRunner
 			await SettleAsync();
 			Check(App.Themes.Active is Uno.Simple.SimpleTheme, "Simple button restores SimpleTheme");
 			Check(Find<TextBox>("WorkspaceNameInput").Text == "A workspace that stays", "Form text survives the return switch");
-			var simpleButtonStyle = Application.Current.Resources["FilledButtonStyle"];
-			Click("CupertinoButton");
-			await SettleAsync();
-			Check(App.Themes.Active is Uno.Cupertino.CupertinoTheme, "Cupertino button installs CupertinoTheme");
-			Check(!ReferenceEquals(simpleButtonStyle, Application.Current.Resources["FilledButtonStyle"]), "Semantic key resolves Cupertino's style");
-			Check(Application.Current.Resources["CupertinoSeparatorBrush"] is SolidColorBrush, "Cupertino vocabulary is available");
-			Check(Find<TextBox>("WorkspaceNameInput").Text == "A workspace that stays", "Form text survives a switch to Cupertino");
-			Check(Find<TextBlock>("ThemeLabel").Text.StartsWith("CUPERTINO"), "Top bar names the active design system");
-			await CaptureAsync("02b-cupertino-settings");
-			Click("SimpleButton");
-			await SettleAsync();
-			Check(App.Themes.Active is Uno.Simple.SimpleTheme, "Simple button restores SimpleTheme after Cupertino");
 
 			var primary = (SolidColorBrush)Application.Current.Resources["PrimaryBrush"];
 			var previous = primary.Color;
@@ -116,13 +105,13 @@ internal static class SmokeRunner
 			await SettleAsync();
 			Check((CurrentPage).ActualTheme == ElementTheme.Dark, "Appearance control changes to dark");
 			await CaptureAsync("04-material-dark-projects");
-			Click("CupertinoButton");
+			Click("SimpleButton");
 			await SettleAsync();
-			Check(App.Themes.Active is Uno.Cupertino.CupertinoTheme && CurrentPage.ActualTheme == ElementTheme.Dark, "Cupertino keeps the dark appearance");
-			Check(state.Projects.Count == count + 1, "Created project survives a switch to Cupertino");
+			Check(App.Themes.Active is Uno.Simple.SimpleTheme && CurrentPage.ActualTheme == ElementTheme.Dark, "Simple keeps the dark appearance");
+			Check(state.Projects.Count == count + 1, "Created project survives a switch back to Simple");
 			(CurrentPage).Navigate("Semantic lab");
 			await SettleAsync();
-			Check(Find<TextBlock>("TokenValues").Text.Contains("Space400"), "Semantic lab resolves current tokens under Cupertino");
+			Check(Find<TextBlock>("TokenValues").Text.Contains("Space400"), "Semantic lab resolves current tokens under Simple");
 			var darkPrimary = ((SolidColorBrush)Find<Border>("PrimaryTile").Background).Color;
 			Click("AppearanceButton");
 			await SettleAsync();
@@ -143,6 +132,15 @@ internal static class SmokeRunner
 			await SettleAsync();
 			Check(Find<ComboBox>("CompactNavigation").Visibility == Visibility.Visible, "Narrow viewport exposes compact navigation");
 			await CaptureAsync("06-narrow-overview");
+			var qrCode = Find<Image>("RepoQrCode");
+			Check(qrCode.Source is WriteableBitmap { PixelWidth: > 0 } code && code.PixelWidth == code.PixelHeight && qrCode.ActualWidth > 0,
+				"Narrow viewport keeps the repository QR code on screen");
+			App.MainWindow.AppWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 1280, Height = 900 });
+			await SettleAsync();
+			var corner = Find<FrameworkElement>("RepoCode").TransformToVisual(CurrentPage).TransformPoint(default);
+			Check(corner.X < 20 && corner.Y + Find<FrameworkElement>("RepoCode").ActualHeight > CurrentPage.ActualHeight - 60,
+				$"Repository QR code sits in the bottom-left corner (at {corner})");
+			await CaptureAsync("07-repo-code");
 			await File.WriteAllLinesAsync(Path.Combine(OutputDirectory, "results.txt"), Results);
 			Console.WriteLine($"SMOKE PASSED: {Results.Count} assertions. {OutputDirectory}");
 			Environment.Exit(0);
@@ -178,10 +176,10 @@ internal static class SmokeRunner
 		.OfType<Button>().First(button => button.Content is string text && text == content));
 	private static void Invoke(Button button) => ((IInvokeProvider)new ButtonAutomationPeer(button)).Invoke();
 
-	private static async Task CaptureAsync(string name)
+	private static async Task CaptureAsync(string name, UIElement? element = null)
 	{
 		var bitmap = new RenderTargetBitmap();
-		await bitmap.RenderAsync(App.MainWindow.Content);
+		await bitmap.RenderAsync(element ?? App.MainWindow.Content);
 		var pixels = await bitmap.GetPixelsAsync();
 		var file = await StorageFile.GetFileFromPathAsync(CreateImageFile(name));
 		using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);

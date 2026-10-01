@@ -59,7 +59,7 @@
                     Background="{ThemeResource SurfaceBrush}"
                     BorderBrush="{ThemeResource OutlineVariantBrush}"
                     BorderThickness="0,0,1,0"
-                    Padding="16,28">
+                    Padding="16,28,16,212">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <StackPanel Spacing="8">
                         <TextBlock Text="WORKSPACE"
@@ -160,6 +160,32 @@
                 </ScrollViewer>
             </Border>
         </Grid>
+        <!-- Pinned over the workspace's bottom-left corner so the audience can scan it on every page and layout. -->
+        <Border x:Name="RepoCode"
+                Grid.Row="1"
+                Width="148"
+                Margin="16"
+                Padding="0,0,0,6"
+                Background="{ThemeResource SurfaceBrush}"
+                CornerRadius="{ThemeResource Radius300CornerRadius}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom">
+            <StackPanel Spacing="6">
+                <!-- The code keeps its own white tile and quiet zone so it scans in dark mode too. -->
+                <Border Background="White"
+                        CornerRadius="{ThemeResource Radius300CornerRadius}">
+                    <Image x:Name="RepoQrCode"
+                           Stretch="None"
+                           AutomationProperties.Name="QR code for the ThemeStudio repository" />
+                </Border>
+                <TextBlock x:Name="RepoUrl"
+                           Style="{StaticResource LabelSmall}"
+                           Foreground="{ThemeResource OnSurfaceVariantBrush}"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center" />
+            </StackPanel>
+        </Border>
         <Grid Grid.Row="2"
               Padding="20,8"
               ColumnDefinitions="*,Auto"
